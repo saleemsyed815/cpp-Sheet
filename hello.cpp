@@ -532,3 +532,313 @@ int main() {
         
     }while(guess!=num);
 }
+
+#include <iostream>
+
+void happyBirthday(std::string name, int age);                      //to write function after the main function we declare it first so that there is no error while compileing it is known as function decoration
+
+int main()
+{
+    // function = a block of reusable code
+
+    std::string name = "Bro";
+    int age = 21;
+
+    happyBirthday(name, age);                                       //since function will not know whats going on in other functions we can send the variables as arguements
+
+    return 0;
+}
+void happyBirthday(std::string name, int age){                      //The parameters should be same as arguement data types. It need not be of the same name (for example we send the arguement as name but we can give it another name in parameters it dosn't effect its value)
+    std::cout << "Happy Birthday to " << name << '\n';
+    std::cout << "Happy Birthday to " << name << '\n';
+    std::cout << "Happy Birthday dear " << name << '\n';
+    std::cout << "Happy Birthday to " << name << '\n';
+    std::cout << "You are " << age << " years old!\n";
+}
+
+// return data type 
+#include <iostream>
+
+double square(double length);
+double cube(double length);
+
+int main()
+{
+    double length = 6.0;
+    double area = square(length);
+    double volume = cube(length);
+
+    std::cout << "Area: " << area << "cm^2\n";
+    std::cout << "Volume: " << volume << "cm^3\n";
+
+    return 0;
+}
+double square(double length){                                       //since the function is returning a double data type to the main function we need to declare it as double function name                             
+                                                                    //we can output what we want using void also but if we want the value to be sent to the main function we have to declare it with the value it returns
+    return length * length;
+}
+double cube(double length){
+    return length * length * length;
+}
+
+
+// Overloaded Functions 
+Functions can have same fuction name with different set of parameters name 
+function name + parameters is called function signature
+
+#include <iostream>
+
+void bakePizza();
+void bakePizza(std::string topping1);
+void bakePizza(std::string topping1, std::string topping2);
+
+int main()
+{
+    bakePizza();
+    bakePizza("pepperoni");
+    bakePizza("pepperoni", "mushroom");
+
+    return 0;
+}
+
+void bakePizza(){
+    std::cout << "Here is your pizza!\n";
+}
+void bakePizza(std::string topping1){
+    std::cout << "Here is your " << topping1 << " pizza!\n";
+}
+void bakePizza(std::string topping1, std::string topping2){
+    std::cout << "Here is your " << topping1 << " and " << topping2 << " pizza!\n";
+}
+
+
+GLobal and Local variables 
+
+#include <iostream>
+
+int myNum = 3; //global
+
+void printNum();
+
+int main()
+{
+    int myNum = 1; //local
+    printNum();
+    std::cout << "main: " << myNum << '\n'; //local
+    //std::cout << ::myNum << '\n'; //global                        //:: is scope resolution operator
+
+    return 0;
+}
+void printNum(){
+    int myNum = 2; //local
+    std::cout << "printNum: "<< myNum << '\n'; //local
+    //std::cout << ::myNum << '\n'; //global
+}
+
+
+// Rock Paper Scissor
+#include <iostream>
+#include <ctime>
+
+char getUserChoice();
+char getComputerChoice();
+void showChoice(char choice);
+void chooseWinner(char player, char computer);
+
+int main() {
+
+	char player;
+	char computer;
+
+	player = getUserChoice();
+	std::cout << "Your choice: ";
+	showChoice(player);
+
+	computer = getComputerChoice();
+	std::cout << "Computer's choice: ";
+	showChoice(computer);
+
+	chooseWinner(player, computer);
+ 
+    return 0;
+}
+char getUserChoice(){
+
+	char player;
+	std::cout << "Rock-Paper-Scissors Game!\n";
+
+	do{
+		std::cout << "Choose one of the following\n";
+		std::cout << "*************************\n";
+		std::cout << "'r' for rock\n";
+		std::cout << "'p' for paper\n";
+		std::cout << "'s' for scissors\n";
+		std::cin >> player;
+	}while(player != 'r' && player != 'p' && player != 's');
+
+	return player;
+}
+char getComputerChoice(){
+
+	srand(time(0));
+	int num = rand() % 3 + 1;
+
+	switch(num){
+		case 1: return 'r';
+		case 2: return 'p';
+		case 3: return 's';
+	}
+
+	return 0;
+}
+void showChoice(char choice){
+
+	switch(choice){
+		case 'r': std::cout << "Rock\n";
+				  break;
+		case 'p': std::cout << "Paper\n";
+				  break;
+		case 's': std::cout << "Scissors\n";
+				  break;
+	}
+}
+void chooseWinner(char player, char computer){
+
+	switch(player){
+		case 'r': 	if(computer == 'r'){
+						std::cout << "It's a tie!\n";
+					}
+					else if(computer == 'p'){
+						std::cout << "You lose!\n";
+					}
+					else{
+						std::cout << "You win!\n";
+					}
+					break;
+		case 'p': 	if(computer == 'r'){
+						std::cout << "You win!\n";
+					}
+					else if(computer == 'p'){
+						std::cout << "It's a tie!\n";
+					}
+					else{
+						std::cout << "You lose!\n";
+					}
+					break;
+		case 's': 	if(computer == 'r'){
+						std::cout << "You lose!\n";
+					}
+					else if(computer == 'p'){
+						std::cout << "You win!\n";
+					}
+					else{
+						std::cout << "It's a tie!\n";
+					}
+					break;
+	}
+}
+
+
+// Arrays
+Arrays should of same data type only
+
+#include <iostream>
+
+int main()
+{
+    std::string cars[3] = {"Corvette", "Mustang", "Camry"};
+
+    std::cout << cars[0] << '\n';
+    std::cout << cars[1] << '\n';
+    std::cout << cars[2] << '\n';
+
+    return 0;
+}
+
+//Sizeof
+sizeof int= 4 bytes,
+sizeof double= 8 bytes,
+sizeof string= 32 bytes,
+sizeof char= 1 bytes,
+sizeof boolean= 1 bytes,
+sizeof array = number of charachters in the array
+
+#include <iostream>
+
+int main()
+{
+    // sizeof() = determines the size in bytes of a: 
+    //                   variable, data type, class, objects, etc.
+
+    std::string name = "Bro Code";
+    double gpa = 2.5;
+    char grade = 'F';
+    bool student = true;
+    char grades[] = {'A', 'B', 'C', 'D', 'F'};
+    std::string students[] = {"Spongebob", "Patrick", "Squidward", "Sandy"};
+
+    std::cout << sizeof(name) << " bytes\n";
+    std::cout << sizeof(students)/sizeof(std::string) << " elements\n";
+    
+    return 0;
+}
+
+// iterating an array.
+#include <iostream>
+
+int main()
+{
+    //std::string students[] = {"Spongebob", "Patrick", "Squidward", "Sandy"};
+    char grades[] = {'A', 'B', 'C', 'D', 'F'};
+
+    for(int i = 0; i < sizeof(grades)/sizeof(grades[0]); i++){
+        std::cout << grades[i] << '\n';
+    }
+
+    return 0;
+}
+
+
+//for each loop
+#include <iostream>
+
+int main()
+{
+    // foreach loop = loop that eases the traversal over an 
+    //                            iterable data set
+
+    int grades[] = {65, 72, 81, 93};
+
+    for(int grade : grades){                                        //grade is variable to store the value for each iteration we can use abc also
+        std::cout << grade << '\n';
+    }
+
+    return 0;
+}
+
+// function in array
+
+#include <iostream>
+ 
+double getTotal(double prices[], int size);
+ 
+int main()
+{
+   double prices[] = {49.99, 15.05, 75, 9.99};      
+   int size = sizeof(prices)/sizeof(prices[0]);                    //Since the array is passed in another function the function cannot find the size so we find the size and send it to the function  or we can send the pointer
+   double total = getTotal(prices, size);
+ 
+   std::cout << "The total is: $" << total;
+ 
+   return 0;
+}
+double getTotal(double prices[], int size) 
+{
+    double total = 0;              
+ 
+    for(int i = 0; i < size; i++){
+        total += prices[i];
+    }
+ 
+    return total;
+}
