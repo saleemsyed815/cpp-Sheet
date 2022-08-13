@@ -842,3 +842,391 @@ double getTotal(double prices[], int size)
  
     return total;
 }
+
+// Search  Array
+#include<iostream>
+
+int searchArray(std::string array[], int size, std::string element);
+
+int main()
+{
+    std::string foods[] = {"pizza", "hamburger", "hotdog"};
+    int size = sizeof(foods)/sizeof(foods[0]);
+    int index;
+    std::string myFood;
+
+    std::cout << "Enter element to search for: " << '\n';
+    std::getline(std::cin, myFood);
+
+    index = searchArray(foods, size, myFood);
+
+    if(index != -1){
+        std::cout << myFood << " is at index " << index;
+    }
+    else{
+        std::cout << myFood << " is not in the array";
+    }
+
+    return 0;
+}
+int searchArray(std::string array[], int size, std::string element){
+
+    for(int i = 0; i < size; i++){
+        if(array[i] == element){
+            return i;
+        }
+    }
+    return -1;
+}
+
+
+// Sorting an Array
+using bubble sort ----- in bubble sort we compare the 2 consecutive elements and compare them with the help of a temporary variable we swap and sort them.  We continue this until the whole array is sorted 
+
+
+#include <iostream>
+
+void sort(int array[], int size);
+
+int main()
+{
+	int array[] = {10, 1, 9, 2, 8, 3, 7, 4, 6, 5};
+	int size = sizeof(array)/sizeof(array[0]);
+
+	sort(array, size);
+
+	for(int element : array){
+		std::cout << element << " ";
+	}
+
+    return 0;
+}
+void sort(int array[], int size){
+	int temp;
+	for(int i = 0; i < size - 1; i++){
+		for(int j = 0; j < size - i - 1; j++){
+			if(array[j] < array[j + 1]){
+				temp = array[j];
+				array[j] = array[j + 1];
+				array[j + 1] = temp;
+			}
+		}
+	}
+}
+
+
+// Fill Function
+fill() -- Fills a range of elements with a specified value
+            fill(begin, end, value)
+
+#include <iostream>
+
+int main(){
+    const int SIZE = 100;
+    std::string foods[SIZE];
+
+    fill(foods, foods+SIZE, "pizza");                        //foods - starting point; foods+SIZE - Ending Point
+
+    // fill(foods, foods+(SIZE/2), "pizza");                 // Fills half with pizza and half with hambuger
+    // fill(foods+(SIZE/2), foods+SIZE, "hamburger");
+
+
+    for(std::string food : foods)
+        std::cout<<food<<' ';
+
+    return 0;
+}
+
+// user input in array
+#include<iostream>
+
+int main(){
+    std::string foods[5];
+    int size = sizeof(foods)/sizeof(foods[0]);
+    std::string temp;
+
+    for(int i=0; i<size; i++){
+        std::cout<<"Enter food you like or 'q' to quit #"<< i+1;
+        std::getline(std::cin, temp);                               //if q is pressed we get out of the loop
+        if(temp == "q"){
+            break;
+        }
+        else{
+            foods[i] = temp;
+        }
+    }
+
+    std::cout<<"Your Foods are : \n";
+
+    for(int i = 0; !foods[i].empty(); i++){                         //iterate till the array is empty
+        std::cout<<foods[i]<<' ';
+    }
+
+    return 0;
+}
+
+
+// 2-D Arrays
+#include <iostream>
+
+int main(){
+    std::string cars[][3] = {{"Mustang", "Escape", "f-150"},
+                            {"coveta", "equinox", "silverado"},
+                            {"challenger", "darngo", "ram150"}};
+
+    int row = sizeof(cars)/sizeof(cars[0]);
+    int columns = sizeof(cars[0])/sizeof(cars[0][0]);
+
+    std::cout<<cars[0][2]<<'\n';
+
+    for(int i=0; i<row; i++){
+        for(int j=0; j<columns; j++){
+            std::cout<<cars[i][j]<<' ';
+        }
+        std::cout<<'\n';
+    }
+
+    return 0;
+}
+
+// Quiz Game
+#include<iostream>
+
+int main(){
+    std::string questions[] = {
+        "1. What is the Capital of India? ",
+        "2. What is the Capital of Telangana? ",
+        "3. What is the National Animal? ",
+        "4. What is the National Bird? "
+    };
+
+    std::string options[][4]{
+        {"A. Mumbai", "B. Kolkata", "C. Chennai", "D. Delhi"},
+        {"A. Warangal", "B. Khammam", "C. Hyderabad", "D. Kurnool"},
+        {"A. Tiger", "B. Cheetah", "C. Peacock", "D. Lion"},
+        {"A. Lotus", "B. Humming Bird", "C. Peacock", "D. Parrot"}
+    };
+
+    char answers[] = {'D', 'C', 'A', 'C'};
+
+    int size = sizeof(questions)/sizeof(questions[0]);
+    char guess;
+    int score;
+
+    for(int i=0; i<size; i++){
+        std::cout<<"*********************"<<'\n';
+        std::cout<<questions[i]<<'\n';
+        std::cout<<"*********************"<<'\n';
+
+        for(int j=0; j<sizeof(options[i])/sizeof(options[i][0]); j++){
+            std::cout<<options[i][j]<<'\n';
+        }
+
+        std::cin>>guess;
+        guess = toupper(guess);
+
+        if(guess == answers[i]){
+            std::cout<<"Correct\n";
+            score++;
+        }
+        else{
+            std::cout<<"Wrong\n";
+            std::cout<<"Correct answer is: "<<answers[i]<<"\n";
+        }
+    }
+
+    std::cout<<"**********************";
+    std::cout<<"Score is"<<score<<"\n";
+}
+
+
+// Memory Address
+memory address = a location in memory where data is stored 
+a memory address ca nbe accessed with &(address-of operator)
+
+#include<iostream>
+
+int main(){
+    std::sting name = "Saleem";
+    int age = 20;
+    bool student = true;
+
+    std::cout<< &name <<'\n';                           
+    std::cout<< &age <<'\n';
+    std::cout<< &student <<'\n';                                //retuns the memory address of the corresponding variables in hexadecimal value
+
+    return 0;
+}
+
+
+//Passby Value and Passby Reference
+When we pass by value we create the copies of the value and pass it
+But When we pass by reference we actually send the original value
+Here when we first sent the values the original variable did not swapped only the cpies got swapped
+But when we pass by reference they got swapped   (we passby reference by sending memory address '&')
+
+#include<iostream>
+
+// void swap(std::string x, std::string y);
+void swap(std::string &x, std::string &y);
+
+
+int main(){
+    std::string x = "Kool-Aid";
+    std::string y = "Water";
+
+    swap(x, y);
+
+    std::cout<<"X: "<< x <<"\n";
+    std::cout<<"Y: "<< y <<"\n";
+
+    return 0;
+}
+
+// void swap(std::string x, std::string y){
+//     std::string temp;
+//     temp = x;
+//     x = y;
+//     y = temp;                                            //This will not swap since we are passing values
+// }
+
+void swap(std::string &x, std::string &y){
+    std::string temp;
+    temp = x;
+    x = y;
+    y = temp;                                            //This will swap since we are passing reference to the memory address
+}
+
+
+// Const Parameter
+const parameter -- parameter that is effectivel read-only
+                    code is more secure and conveys intent 
+                    useful for references and pointers
+
+#include<iostream>
+
+void printInfo(const std::string name, const int age);                //We use const parameter so that the value does not change in another funstion
+
+int main(){
+    std::string name = "Saleem";
+    int age = 20;
+
+    printInfo(name, age);
+
+    return 0;
+}
+
+void printInfo(const std::string name, const int age){
+    // name = "saleemuddin";
+    // age ="19";                                   //This gives an error because we can not modify const parameters
+
+    std::cout<<name<< '\n';
+    std::cout<<age<< '\n';
+}
+
+
+// Credit Card Validator Program
+for a valid credit card                                                                     6011 0009 9013 9424
+1. Double every second digit from right to left If doubled digit is 2digit split it         1 2(6 double is 12 split it) 2(one double) 0 0 1 8(9 double) 2 1 8 4  
+2. add all the single digits                                                                1+2+2+0+0+1+8+2+1+8+4 = 29
+3. Now take odd digits from rigth to left   and add them                                    0 1 0 9 0 3 4 4 = 29          
+4. sum result of step2 and step3                                                            21 + 29 = 50
+5. This should be dividible by 10                                                           divisible by 10 so valid credit number
+
+#include<iostream>
+
+int getDigit(const int number);
+int sumOddDigits(const std::string cardNumber);
+int sumEvenDigits(const std::string cardNumber);
+
+int main(){
+    std::string cardNumber;
+    int result = 0;
+
+    std::cout<<"Enter the Card Number: "<<'\n';
+    std::cin>>cardNumber;
+
+    result = sumEvenDigits(cardNumber) + sumOddDigits(cardNumber);
+
+    if(result % 10 == 0)
+        std::cout<<"Valid Card Number\n";
+    else        
+        std::cout<<"invalid Card Number\n";
+
+    return 0;
+}
+
+int getDigit(const int number){
+    //18 18%10 = 8,       18/10 = 1 %10 =1   so we get 1+8=9
+    return number %10 + (number/10 % 10);                                    //This will return the digits of the number that got 2 digit to sumEvenDigit
+}
+
+int sumOddDigits(const std::string cardNumber){
+    int sum = 0;
+
+    for(int i = cardNumber.size()-1; i>=0; i=-2){                            
+        sum += (cardNumber[i] - '0') * 2;                          
+    }
+
+    return sum;
+}
+
+int sumEvenDigits(const std::string cardNumber){
+    int sum = 0;
+
+    for(int i = cardNumber.size()-2; i>=0; i=-2){                            //string last index is size-1  we want even so size-2
+        sum += getDigit((cardNumber[i] - '0') * 2);                          // returns ASCII value so subtracting by ASCII value of 0 to get the number value
+    }
+
+    return sum;
+}
+
+
+// Pointers
+pointer---- pointer variable stores a memory address of another variable
+
+& -- address of operator
+* -- dereference operator
+
+#include<iostream>
+
+int main(){
+    
+    std::string name = "Saleem";
+
+    std::string *pName = &name;                                             //pname gets the address of name
+                                                                            //for array we dont need to add & because array is already a memory address
+    std::cout<<*pNname<<'/n';       
+
+    return 0;
+}
+
+
+// Null Pointers
+If a Pointer is holding a null value i.e., it is not pointing at anything
+
+nullptr -- a keyword that represents a null pointer 
+
+nullptr are usefull to determine whether the memory address is successfully assigned to the pointer or not
+
+When using a pointer be careful that the code is not  dereferencing nullptr or pointing to free memory. This will cause undefined behavoiour
+
+#include<iostream>
+
+int main(){
+    int *pointer = nullptr;
+    int c = 203;
+
+    *pointer = &c;
+
+    if(pointer == nullptr){
+        std::cout<<"Address is not assigned";
+    }
+    else
+        std::cout<<"Address is assigned";
+        std::cout<<"its value is : "<<*pointer;
+
+    return 0;
+}
+
+
